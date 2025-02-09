@@ -1,7 +1,3 @@
-Sure! Here's an updated README with a more complex-sounding name:
-
----
-
 # **HyperOptiDetect-X: Advanced YOLOv10 Object Recognition System**
 
 ## Overview
