@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLOv10 Object Detection</title>
+    <!-- Link to Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600,700' rel='stylesheet'>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>YOLOv10: Object Detection</h1>
+            <p class="subtitle">Detect objects in images and videos with state-of-the-art accuracy</p>
+        </header>
+        <div class="card">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="model">Select Model:</label>
+                    <select name="model" id="model" class="input">
+                        <option value="yolov10n">YOLOv10n(Fast, Best for Images)</option>
+                        <option value="yolov10s">YOLOv10s(Balanced, Good for Both)</option>
+                        <option value="yolov10m">YOLOv10m(Accurate, Fast)</option>
+                        <option value="yolov10b">YOLOv10b(Accurate, Slow)</option>
+                        <option value="yolov10l">YOLOv10l(Very Accurate, Slower)</option>
+                        <option value="yolov10x">YOLOv10x(Most Accurate, Slowest)</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="image_size">Image Size:</label>
+                        <input type="number" name="image_size" id="image_size" value="640" min="320" max="1280" step="32" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="conf_threshold">Confidence Threshold:</label>
+                        <input type="number" name="conf_threshold" id="conf_threshold" step="0.05" value="0.25" min="0" max="1" class="input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file">Upload File:</label>
+                    <div class="upload-container">
+                        <input type="file" name="file" id="fileInput" accept="image/*,video/*" class="file-input">
+                        <label for="fileInput" class="upload-label">
+                            <div class="upload-icon">📁</div>
+                            <span>Choose a file or drag it here</span>
+                        </label>
+                    </div>
+                </div>
+                <button type="button" id="detectButton" class="detect-btn">
+                    <span class="btn-text">Detect Objects</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <!-- Loading Screen -->
+            <div id="loadingScreen" class="loading-screen" style="display: none;">
+                <div class="spinner"></div>
+                <p id="loadingText">Processing... <span id="timer">0s</span></p>
+            </div>
+
+            <!-- Processing Time Section -->
+            <div id="processingTime" class="processing-time" style="display: none;">
+                <p><strong>Processing Time:</strong> <span id="timeTaken">0s</span></p>
+            </div>
+
+            <div class="results-container">
+                <div class="image-preview">
+                    <h3>Original File</h3>
+                    <img id="previewImage" src="" alt="Preview Image" style="display:none;">
+                    <video id="previewVideo" controls style="display:none; max-width: 100%;"></video>
+                </div>
+                <div class="image-result">
+                    <h3>Detection Result</h3>
+                    <img id="resultImage" src="" alt="Result Image" style="display:none;">
+                    <a id="downloadLink" class="download-link" style="display:none;">Download Result</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model Descriptions Section -->
+        <div class="model-descriptions">
+            <h2>Model Details</h2>
+            <div class="model-card">
+                <h3>YOLOv10n</h3>
+                <p><strong>Use Case:</strong> Fast, best for small images.</p>
+                <p><strong>Advantages:</strong> Extremely fast, lightweight, ideal for real-time applications.</p>
+                <p><strong>Disadvantages:</strong> Lower accuracy compared to larger models.</p>
+            </div>
+            <div class="model-card">
+                <h3>YOLOv10s</h3>
+                <p><strong>Use Case:</strong> Balanced, good for both images and videos.</p>
+                <p><strong>Advantages:</strong> Good trade-off between speed and accuracy.</p>
+                <p><strong>Disadvantages:</strong> Not the fastest or most accurate.</p>
+            </div>
+            <div class="model-card">
+                <h3>YOLOv10m</h3>
+                <p><strong>Use Case:</strong> Accurate and fast, suitable for medium-sized tasks.</p>
+                <p><strong>Advantages:</strong> High accuracy with reasonable speed.</p>
+                <p><strong>Disadvantages:</strong> Requires more computational resources than smaller models.</p>
+            </div>
+            <div class="model-card">
+                <h3>YOLOv10b</h3>
+                <p><strong>Use Case:</strong> Accurate but slower, ideal for detailed object detection.</p>
+                <p><strong>Advantages:</strong> Very high accuracy.</p>
+                <p><strong>Disadvantages:</strong> Slower inference time.</p>
+            </div>
+            <div class="model-card">
+                <h3>YOLOv10l</h3>
+                <p><strong>Use Case:</strong> Very accurate, slower, suitable for large-scale tasks.</p>
+                <p><strong>Advantages:</strong> Exceptional accuracy for complex scenarios.</p>
+                <p><strong>Disadvantages:</strong> High resource consumption and slow inference.</p>
+            </div>
+            <div class="model-card">
+                <h3>YOLOv10x</h3>
+                <p><strong>Use Case:</strong> Most accurate, slowest, for research or high-precision tasks.</p>
+                <p><strong>Advantages:</strong> Maximum accuracy for demanding applications.</p>
+                <p><strong>Disadvantages:</strong> Extremely slow and resource-intensive.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
